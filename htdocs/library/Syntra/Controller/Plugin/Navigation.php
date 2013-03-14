@@ -10,18 +10,20 @@ class Syntra_Controller_Plugin_Navigation extends Zend_Controller_Plugin_Abstrac
         
         $container = new Zend_Navigation();
         
+        //Zend_Debug::dump($pages);exit;
         foreach($pages as $page) {
             $menu = new Zend_Navigation_Page_Mvc(
                         array(
                             'label' =>$page['title'],
-                            'controller' => 'index',
+                            //'controller' => 'index',
+                            'route' => 'page',
                             'params' => array('slug' => $page['slug'],
                                               'lang' => $locale)
                         )
                     );
             $container->addPage($menu);
         }
-        
+        //Zend_Debug::dump($container);exit;
         Zend_Registry::set('Zend_Navigation', $container);
     }
 }

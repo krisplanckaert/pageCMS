@@ -16,18 +16,23 @@ class Syntra_Controller_Plugin_Translate extends Zend_Controller_Plugin_Abstract
         
         $translate = new Zend_Translate('array', array('yes' => 'ja'), $locale);
         
-        $model = new Application_Model_Translation();
-        //ophalen alle vertalingen voor huidige locale
-        $translations = $model->getTranslationByLocale($locale);
-        
-        //Alle vertalingen toevoegen aan het translate object
-        foreach($translations as $translation) 
-        {
-            $t = array($translation->tag => $translation->translation);
-            $translate->addTranslation($t, $locale);
-        }
-        //Maak overal beschikbaar
-        Zend_Registry::set('Zend_Translate', $translate);
+        $cache = false;
+        if($cache == true) {
+            
+        } else {
+            $model = new Application_Model_Translation();
+            //ophalen alle vertalingen voor huidige locale
+            $translations = $model->getTranslationByLocale($locale);
+
+            //Alle vertalingen toevoegen aan het translate object
+            foreach($translations as $translation) 
+            {
+                $t = array($translation->tag => $translation->translation);
+                $translate->addTranslation($t, $locale);
+            }
+            //Maak overal beschikbaar
+            Zend_Registry::set('Zend_Translate', $translate);
+        }       
     }
 }
 

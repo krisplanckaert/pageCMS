@@ -1,6 +1,6 @@
 <?php
 
-class IndexController extends Zend_Controller_Action
+class Admin_IndexController extends Zend_Controller_Action
 {
 
     public function init()
@@ -10,9 +10,7 @@ class IndexController extends Zend_Controller_Action
 
     public function indexAction()
     {
-        // action body
-        $data = $this->getAllParams();
-        var_dump($data);
+        die('Ik zit in de admin module');
     }
 
 

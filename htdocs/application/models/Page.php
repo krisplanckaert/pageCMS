@@ -19,6 +19,26 @@ class Application_Model_Page extends Zend_Db_Table_Abstract
         $result = $this->fetchAll($select);
         return $result;
     }
+    
+    /**
+     * get the page by slug and locale
+     * @param Zend_locale $locale
+     * @param type $slug
+     */
+    public function getPage( $locale, $slug = NULL)
+    {
+        if($slug === null) {
+            return;
+        }
+        
+        $select = $this->select()
+                ->where('status = ?', self::STATUS_ONLINE)
+                ->where('locale = ?', $locale)
+                ->where('slug = ?', $slug);
+        $result = $this->fetchAll($select)->current();
+        return $result;
+        
+    }
 
 }
 
