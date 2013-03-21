@@ -69,6 +69,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                 'controller' => 'index',
                 'action'     => 'index',
             )));
+        //add custom route
+        // : before param = get variabele
+        $router->addRoute('noaccess', 
+            new Zend_Controller_Router_Route('noaccess', array(
+                'controller' => 'noaccess',
+                'action'     => 'index',
+            )));
         
     }
 

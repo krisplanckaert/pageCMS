@@ -14,6 +14,11 @@ class IndexController extends Zend_Controller_Action
         $data = $this->getAllParams();
         var_dump($data);
     }
+    
+    public function noaccessAction()
+    {
+        $this->_helper->layout->disableLayout();
+    }
 
 
 }

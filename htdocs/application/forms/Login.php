@@ -19,7 +19,7 @@ class Application_Form_Login extends Zend_Form
         )));
         
         //Password
-        $this->addElement(new Zend_Form_Element_Text('Password', array(
+        $this->addElement(new Zend_Form_Element_Password('Password', array(
             'label' => 'password_lbl',
             'filters' => array('stringTrim'),
             'required' => true,

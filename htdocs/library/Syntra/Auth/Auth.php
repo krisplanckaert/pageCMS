@@ -4,8 +4,8 @@ class Syntra_Auth_Auth extends Zend_Controller_Plugin_Abstract
 {
     public function preDispatch(\Zend_Controller_Request_Abstract $request) 
     {
-        $loginController = 'User';
-        $loginAction     = 'Login';   
+        $loginController = 'user';
+        $loginAction     = 'login';   
         $locale          = Zend_Registry::get('Zend_Locale');
         $auth            = Zend_Auth::getInstance();
         
@@ -20,7 +20,27 @@ class Syntra_Auth_Auth extends Zend_Controller_Plugin_Abstract
         }
         
         if($auth->hasIdentity()) {
-            die('Hello user *wave*');
+            //$auth->clearIdentity();
+            //die('Hello user *wave*');
+            $registry = Zend_Registry::getInstance();
+            //die('test');
+            //$acl = $registry->get('Zend_Acl');
+            $acl = Zend_Registry::get('Zend_Acl');
+            
+            $identity = $auth->getIdentity();  //$identity = username
+            
+            $usersModel = new Application_Model_Users();
+            $user = $usersModel->getUserByIdentity($identity);
+            $role = $user->role;
+            
+            //role is een veld binnen onze user tabel
+            $isAllowed = $acl->isAllowed($role,  // -> role, moet uit Db komen
+                            $request->getControllerName(),
+                            $request->getActionName());
+            if(!$isAllowed) {
+                $redirector = Zend_Controller_Action_HelperBroker::getStaticHelper('redirector');
+                $redirector->gotoUrl('/noaccess');
+            }
         }
     }
 }

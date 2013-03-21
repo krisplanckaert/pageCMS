@@ -28,6 +28,7 @@
       <modelsDirectory>
         <modelFile modelName="Translation"/>
         <modelFile modelName="Page"/>
+        <modelFile modelName="Users"/>
       </modelsDirectory>
       <modulesDirectory>
         <moduleDirectory moduleName="admin">
