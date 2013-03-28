@@ -32,17 +32,22 @@ class Syntra_Auth_Auth extends Zend_Controller_Plugin_Abstract
             $usersModel = new Application_Model_Users();
             $user = $usersModel->getUserByIdentity($identity);
             $role = $user->role;
-            $resource = $request->getModuleName().'-'.$request->getControllerName();
             
-            if($acl->has($resource)) {
-                //role is een veld binnen onze user tabel
+            //role is een veld binnen onze user tabel
+            if($request->getModuleName()!=='' and $request->getModuleName()!=='default' and $request->getModuleName()!==null) {
+                //Zend_Debug::dump($request->getModuleName);exit;
                 $isAllowed = $acl->isAllowed($role,  // -> role, moet uit Db komen
-                                $resource,
+                                $request->getModuleName().'-'.$request->getControllerName(),
                                 $request->getActionName());
-                if(!$isAllowed) {
-                    $redirector = Zend_Controller_Action_HelperBroker::getStaticHelper('redirector');
-                    $redirector->gotoUrl('/noaccess');
-                }
+                
+            } else {
+                $isAllowed = $acl->isAllowed($role,  // -> role, moet uit Db komen
+                                $request->getControllerName(),
+                                $request->getActionName());
+            }
+            if(!$isAllowed) {
+                $redirector = Zend_Controller_Action_HelperBroker::getStaticHelper('redirector');
+                $redirector->gotoUrl('/noaccess');
             }
         }
     }
