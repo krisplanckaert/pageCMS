@@ -18,6 +18,11 @@
           <actionMethod actionName="index"/>
           <actionMethod actionName="login"/>
         </controllerFile>
+        <controllerFile controllerName="Producten">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="client"/>
+          <actionMethod actionName="server"/>
+        </controllerFile>
       </controllersDirectory>
       <formsDirectory/>
       <layoutsDirectory>
@@ -29,6 +34,7 @@
         <modelFile modelName="Translation"/>
         <modelFile modelName="Page"/>
         <modelFile modelName="Users"/>
+        <modelFile modelName="Producten"/>
       </modelsDirectory>
       <modulesDirectory>
         <moduleDirectory moduleName="admin">
@@ -72,6 +78,15 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="User">
             <viewScriptFile forActionName="login"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Producten">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Producten">
+            <viewScriptFile forActionName="client"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Producten">
+            <viewScriptFile forActionName="server"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>

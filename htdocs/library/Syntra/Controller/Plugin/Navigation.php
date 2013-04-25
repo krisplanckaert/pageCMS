@@ -48,7 +48,7 @@ class Syntra_Controller_Plugin_Navigation extends Zend_Controller_Plugin_Abstrac
             $cache->save($container, 'navigation');
         } else {
             $container = $result;
-            echo 'we zitten in de cache!';
+            //echo 'we zitten in de cache!';
         }
         Zend_Registry::set('Zend_Navigation', $container);
     }
