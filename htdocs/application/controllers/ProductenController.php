@@ -15,7 +15,11 @@ class ProductenController extends Zend_Controller_Action
 
     public function clientAction()
     {
-        // action body
+        $client = new Zend_Soap_Client('http://192.168.33.95/producten/server?wsdl');
+        $client->setSoapVersion(SOAP_1_1); //normaal is het 1.2, voor Zend 1.1
+        $result = $client->addProducts('title', 'Omschrijving', 15);
+        //var_dump($result);
+        
     }
 
     public function serverAction()
@@ -27,11 +31,11 @@ class ProductenController extends Zend_Controller_Action
         $wsdl = $this->_getParam('wsdl');
         if(isset($wsdl)) {
             $server = new Zend_Soap_AutoDiscover();
-            $server->setClass('Application_Model_Producten');
+            $server->setClass('Admin_Model_Producten');
             $server->handle();
         } else {
             $server = new Zend_Soap_Server();
-            $server->setClass('Application_Model_Producten');
+            $server->setClass('Admin_Model_Producten');
             $server->setObject(new Application_Model_Producten());
             $server->handle();
         }
