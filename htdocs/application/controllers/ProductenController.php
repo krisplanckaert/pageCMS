@@ -6,6 +6,8 @@ class ProductenController extends Zend_Controller_Action
     public function init()
     {
         /* Initialize action controller here */
+        ini_set("soap.wsdl_cache_enabled", 0);
+        ini_set("soap.wsdl_cache_ttl", 0);
     }
 
     public function indexAction()
@@ -19,7 +21,7 @@ class ProductenController extends Zend_Controller_Action
         $client = new Zend_Soap_Client('http://adv1302.mediacampus.be/producten/server?wsdl');
         $client->setSoapVersion(SOAP_1_1); //normaal is het 1.2, voor Zend 1.1
         $result = $client->addProducts('kris', 'WWW', 15);
-        //var_dump($result);
+        var_dump($result);exit;
         
     }
 
